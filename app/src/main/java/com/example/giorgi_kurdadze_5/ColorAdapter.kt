@@ -5,9 +5,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.giorgi_kurdadze_5.ColorsData
+import com.example.giorgi_kurdadze_5.OnItemClickListener
 import com.example.giorgi_kurdadze_5.R
 
-class ColorAdapter(private val colorList: MutableList<ColorsData>) : RecyclerView.Adapter<ColorAdapter.ColorViewHolder>() {
+class ColorAdapter(private val colorList: MutableList<ColorsData>, private val listener: OnItemClickListener) : RecyclerView.Adapter<ColorAdapter.ColorViewHolder>() {
 
     class ColorViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val colorName: TextView = itemView.findViewById(R.id.colorName)
@@ -23,6 +24,10 @@ class ColorAdapter(private val colorList: MutableList<ColorsData>) : RecyclerVie
         val currentItem = colorList[position]
         holder.colorName.text = currentItem.name
         holder.colorCode.text = currentItem.color
+
+        holder.itemView.setOnClickListener {
+            listener.onItemClick(currentItem.id)
+        }
     }
 
     override fun getItemCount(): Int {

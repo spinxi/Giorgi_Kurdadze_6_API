@@ -2,17 +2,11 @@ package com.example.giorgi_kurdadze_5
 
 import com.google.gson.annotations.SerializedName
 
-data class Colors(
-    val page: Int,
-    @SerializedName("per_page")
-    val perPage: Int,
-    val total: Int,
-    @SerializedName("total_pages")
-    val totalPages: Int,
-    val data: List<ColorsData>
+data class ColorsDetails(
+    val data: ColorData
 )
 
-data class ColorsData(
+data class ColorData(
     val id: Int,
     val name: String,
     val year: Int,
@@ -20,5 +14,4 @@ data class ColorsData(
     @SerializedName("pantone_value")
     val pantoneValue: String
 )
-
 

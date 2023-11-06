@@ -1,6 +1,7 @@
 package com.example.giorgi_kurdadze_5
 
 import ColorAdapter
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -10,7 +11,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), OnItemClickListener {
     private lateinit var recyclerView: RecyclerView
     private lateinit var colorAdapter: ColorAdapter
     private var mList: MutableList<ColorsData> =  ArrayList()
@@ -26,8 +27,10 @@ class MainActivity : AppCompatActivity() {
     private fun showRecyclerview() {
         recyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        colorAdapter = ColorAdapter(mList)
+        colorAdapter = ColorAdapter(mList, this)
         recyclerView.adapter = colorAdapter
+
+        colorAdapter
     }
 
 
@@ -52,5 +55,11 @@ class MainActivity : AppCompatActivity() {
                 Log.e("API", "Request failed with exception: ${t.message}")
             }
         })
+    }
+
+    override fun onItemClick(id: Int) {
+        val intent = Intent(this, DetailsActivity::class.java)
+        intent.putExtra("COLOR_ID", id)
+        startActivity(intent)
     }
 }
